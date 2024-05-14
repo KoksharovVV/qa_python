@@ -30,10 +30,9 @@ class TestBooksCollector:
         collector.add_new_book(name)
         assert len(collector.get_books_genre()) == res
 
-    def test_set_book_genre_set_existing_genre(self, collector):
-        collector.add_new_book('Lorem ipsum dolor sit amet, consectetuer')
-        collector.set_book_genre('Lorem ipsum dolor sit amet, consectetuer', 'Ужасы')
-        assert collector.books_genre['Lorem ipsum dolor sit amet, consectetuer'] == 'Ужасы'
+    def test_set_book_genre_set_existing_genre(self, collector, book):
+        collector.set_book_genre('Наименование', 'Ужасы')
+        assert collector.books_genre['Наименование'] == 'Ужасы'
 
     @pytest.mark.parametrize('name, genre, res', (
             ['Наименование', "Ужасы", "Ужасы"],
@@ -105,4 +104,4 @@ class TestBooksCollector:
     def test_get_list_of_favorites_books(self, collector, name, res):
         collector.add_new_book(name)
         collector.add_book_in_favorites(name)
-        assert collector.favorites == res
+        assert collector.get_list_of_favorites_books() == res
